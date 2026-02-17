@@ -60,7 +60,32 @@ agent-history --query "cloud run"
 
 # Smartcase: 大文字を含むトークンだけ大小区別
 agent-history --query "GitHub Actions"
+
+# JSON出力（非対話モード。スクリプトやAIエージェントから利用）
+agent-history --json --max-results 10
+agent-history --query "webpack" --json
 ```
+
+### ヘッドレス / JSONモード
+
+`--json` を指定するとTUIを起動せず、JSON配列を標準出力に出力します。
+スクリプトや `jq` へのパイプ、AIコーディングエージェントからの会話検索に便利です。
+
+```bash
+agent-history --query "deploy" --json --max-results 5
+```
+
+出力される各エントリのフィールド:
+
+| フィールド | 説明 |
+|-----------|------|
+| `session_id` | セッション固有ID |
+| `source` | `claude`, `codex`, `codex_history` のいずれか |
+| `last_activity` | 最終更新タイムスタンプ |
+| `cwd` | 作業ディレクトリのフルパス |
+| `dir` | ディレクトリ名（末尾部分） |
+| `first_message` | セッション内の最初のユーザー発言 |
+| `resume_cmd` | セッション再開用のシェルコマンド |
 
 ## キー操作
 - 文字入力: クエリ更新（即時検索）

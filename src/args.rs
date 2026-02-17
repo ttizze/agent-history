@@ -25,4 +25,8 @@ pub struct Args {
     /// 結果表示の上限（0で無制限）
     #[arg(long, default_value_t = 5000)]
     pub max_results: usize,
+
+    /// TUIを起動せずJSON形式で結果を標準出力に出力する
+    #[arg(long)]
+    pub json: bool,
 }
