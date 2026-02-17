@@ -1,4 +1,5 @@
 mod args;
+mod headless;
 mod indexer;
 mod search;
 mod tui;
@@ -8,6 +9,10 @@ use clap::Parser;
 
 fn main() -> anyhow::Result<()> {
     let args = args::Args::parse();
-    tui::run(args).context("TUIの実行に失敗しました")?;
+    if args.json {
+        headless::run(args).context("JSON出力に失敗しました")?;
+    } else {
+        tui::run(args).context("TUIの実行に失敗しました")?;
+    }
     Ok(())
 }

@@ -47,13 +47,13 @@ struct IndexingProgress {
 }
 
 #[derive(Debug, Clone)]
-struct SessionSummary {
-    source: SourceKind,
-    session_id: String,
-    first_user_idx: usize,
-    last_ts: Option<String>,
-    dir: String,
-    first_line: String,
+pub(crate) struct SessionSummary {
+    pub(crate) source: SourceKind,
+    pub(crate) session_id: String,
+    pub(crate) first_user_idx: usize,
+    pub(crate) last_ts: Option<String>,
+    pub(crate) dir: String,
+    pub(crate) first_line: String,
 }
 
 #[derive(Debug, Default)]
@@ -63,7 +63,7 @@ struct SessionAgg<'a> {
     cwd: Option<&'a str>,
 }
 
-fn build_session_index(all: &[MessageRecord]) -> (Vec<SessionSummary>, Vec<Vec<usize>>) {
+pub(crate) fn build_session_index(all: &[MessageRecord]) -> (Vec<SessionSummary>, Vec<Vec<usize>>) {
     #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
     struct SessionKeyRef<'a> {
         source: SourceKind,

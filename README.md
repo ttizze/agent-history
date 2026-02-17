@@ -64,6 +64,47 @@ agent-history --query "cloud run"
 
 # Smartcase: tokens with ASCII uppercase are case-sensitive
 agent-history --query "GitHub Actions"
+
+# JSON output (non-interactive, for scripting / AI agent use)
+agent-history --json --max-results 10
+agent-history --query "webpack" --json
+```
+
+## Headless / JSON Mode
+
+`--json` skips the TUI and prints a JSON array to stdout. This is useful for
+scripting, piping into `jq`, or letting AI coding agents search conversation
+history programmatically.
+
+```bash
+agent-history --query "deploy" --json --max-results 5
+```
+
+Each entry in the array contains:
+
+| Field | Description |
+|-------|-------------|
+| `session_id` | Unique session identifier |
+| `source` | `claude`, `codex`, or `codex_history` |
+| `last_activity` | Timestamp of most recent activity |
+| `cwd` | Full working directory path |
+| `dir` | Directory basename |
+| `first_message` | First user message in the session |
+| `resume_cmd` | Ready-to-run shell command to resume the session |
+
+Example output:
+```json
+[
+  {
+    "session_id": "dc033d01-a276-4c10-bfaf-2b5d4dba7429",
+    "source": "claude",
+    "last_activity": "2026-02-17T18:20:16.446Z",
+    "cwd": "/home/user/my-project",
+    "dir": "my-project",
+    "first_message": "Help me fix the webpack config",
+    "resume_cmd": "claude --resume dc033d01-a276-4c10-bfaf-2b5d4dba7429"
+  }
+]
 ```
 
 ## Keys
