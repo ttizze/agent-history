@@ -11,7 +11,7 @@ categories = ["command-line-utilities"]
 
 [dependencies]
 anyhow = "1.0.97"
-clap = { version = "4.5.31", features = ["derive"] }
+clap = { version = "4.6.1", features = ["derive"] }
 crossterm = "0.29.0"
 ratatui = "0.30.0"
 serde = { version = "1.0.218", features = ["derive"] }
